@@ -24,14 +24,16 @@ module.exports.Search = async ({
   );
 
   return {
-    alteration: data.queryContext.alteredQuery && {
-      query: data.queryContext.alteredQuery,
-      override: data.queryContext.alterationOverrideQuery,
-    },
+    alteration: data.queryContext.alteredQuery
+      ? {
+          query: data.queryContext.alteredQuery,
+          override: data.queryContext.alterationOverrideQuery,
+        }
+      : null,
     matches: data.webPages.totalEstimatedMatches,
     results: data.webPages.value.map((result) => ({
       title: result.name,
-      description: result.snippet,
+      description: result.snippet?.trim() || null,
       url: result.url,
     })),
   };
