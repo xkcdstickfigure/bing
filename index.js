@@ -1,4 +1,6 @@
 require("dotenv").config();
 
+const markets = require("./markets.json");
+
 const { Search } = require("./bing");
-Search("Archie Baer").then(console.log);
+Search({ query: "AllesHQ", market: markets["GB"] }).then(console.log);
